@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Drag_drop.css">  
+</head>
+<body>
+    <section id="dragBlock">
+        <article>
+            <div class="container">
+                <div id="left">
+                    <div class="list" draggable="true">List Items1</div>
+                    <div class="list" draggable="true">List Items2</div>
+                    <div class="list" draggable="true">List Items3</div>
+                    <div class="list" draggable="true">List Items4</div>
+                </div>
+                <div id="right"></div>
+            </div>
+        </article>
+    </section>
+    <script>
+        let list=document.getElementsByClassName("list");
+        let left=document.getElementById("left");
+        let right=document.getElementById("right");
+        // console.log(list);
+
+        [...list].map(ele=>{
+            ele.addEventListener("dragstart",e=>
+            {
+                // console.log(e.target);
+                let selectedEle=e.target;
+                right.addEventListener("dragover",event=>{
+                    event.preventDefault();
+                });
+                right.addEventListener("drop",e=>{
+                    right.appendChild(selectedEle);
+                    selectedEle=null;
+                })
+                left.addEventListener("dragover",event=>{
+                    event.preventDefault();
+                });
+                left.addEventListener("drop",e=>{
+                    left.appendChild(selectedEle);
+                    selectedEle=null;
+                })
+            })
+        })
+    </script>
+</body>
+</html>
